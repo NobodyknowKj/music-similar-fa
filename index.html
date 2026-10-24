@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>هم‌نوا | پیشنهاد خواننده و آهنگ مشابه</title>
+<meta name="description" content="نام خواننده یا آهنگ را بنویسید تا ۱۰ پیشنهاد مشابه با کاور، عکس خواننده و لینک گوش دادن بگیرید.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<style>
+:root{
+  --cream:#FBF1DC; --sand:#F3E2C2; --sand2:#EAD9B8; --card:#FFFDF6;
+  --brown:#3A2415; --brown2:#5C3317; --orange:#C2571B; --orange2:#E07A2C;
+  --pom:#8C2F2F; --olive:#6B7A3A; --gold:#C9A227; --ink:#2E1D10; --muted:#7A5C3E;
+  --shadow:0 12px 30px rgba(58,36,21,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:Vazirmatn, Tahoma, sans-serif; color:var(--ink);
+  background:var(--cream);
+  background-image:radial-gradient(rgba(194,87,27,.10) 1.2px, transparent 1.2px);
+  background-size:24px 24px;
+}
+a{color:inherit}
+.wrap{max-width:1060px; margin:0 auto; padding:18px 16px 60px}
+header.hero{
+  text-align:center; padding:28px 18px 8px;
+}
+.orn{color:var(--gold); letter-spacing:10px; font-size:18px}
+h1{margin:6px 0 8px; font-size:clamp(30px,7vw,52px); line-height:1.2; color:var(--brown)}
+h1 span{color:var(--orange)}
+.hero p{margin:0 auto; max-width:640px; color:var(--muted); line-height:1.9; font-size:16px}
+.badge{display:inline-block; background:#fff; border:1px solid var(--gold); color:var(--brown2); border-radius:999px; padding:4px 14px; font-size:13px}
+
+/* search card */
+.search-card{
+  margin:26px auto 0; max-width:820px; background:var(--card);
+  border:2px solid var(--gold); outline:3px double var(--gold); outline-offset:6px;
+  border-radius:24px; padding:22px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+}
+.search-card:before,.search-card:after{content:"✦"; position:absolute; color:#E8C766; font-size:26px; opacity:.55}
+.search-card:before{top:10px; left:14px}.search-card:after{bottom:10px; right:14px}
+.search-card label.lbl{display:block; font-weight:700; margin:2px 4px 10px; font-size:17px}
+.input-row{display:flex; gap:10px}
+input[type=text]{
+  flex:1; min-width:0; border:2px solid var(--sand2); background:#fff; border-radius:14px;
+  padding:14px 16px; font:inherit; font-size:17px; color:var(--ink); outline:none;
+}
+input[type=text]:focus{border-color:var(--orange); box-shadow:0 0 0 4px rgba(194,87,27,.15)}
+button.go{
+  border:0; border-radius:14px; background:linear-gradient(135deg,var(--pom),var(--orange));
+  color:#fff; font:inherit; font-weight:800; padding:0 26px; cursor:pointer; font-size:16px; white-space:nowrap;
+}
+button.go:disabled{opacity:.6; cursor:wait}
+fieldset{border:0; padding:0; margin:18px 0 0}
+legend{font-weight:700; font-size:14px; color:var(--brown2); margin-bottom:8px}
+.radios{display:flex; flex-wrap:wrap; gap:8px}
+.radio-pill{cursor:pointer}
+.radio-pill input{position:absolute; opacity:0; pointer-events:none}
+.radio-pill span{
+  display:inline-flex; align-items:center; gap:6px; background:#fff; border:1.5px solid var(--sand2);
+  border-radius:999px; padding:8px 14px; font-size:14px;
+}
+.radio-pill input:checked + span{background:var(--brown); color:#fff; border-color:var(--brown)}
+.radio-pill input:focus-visible + span{outline:3px solid rgba(194,87,27,.4)}
+.hidden{display:none !important}
+.hint{font-size:13px; color:var(--muted); line-height:1.8; margin:14px 4px 0}
+.chips{margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.chips b{font-size:13px; color:var(--brown2)}
+.chip{
+  border:1px solid var(--gold); background:#fff; border-radius:999px; padding:6px 12px;
+  font:inherit; font-size:13px; cursor:pointer;
+}
+.chip:hover{background:var(--sand)}
+
+/* status */
+.status{max-width:820px; margin:20px auto 0; text-align:center; color:var(--muted); line-height:1.9}
+.spinner{width:34px; height:34px; border:4px solid var(--sand2); border-top-color:var(--orange); border-radius:50%; margin:10px auto; animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{background:#FDF0E9; border:1px solid #E8A488; color:#7A2E14; border-radius:14px; padding:14px 16px; text-align:center; line-height:1.9}
+
+/* results */
+.results-head{margin:34px 0 16px; display:flex; flex-wrap:wrap; gap:10px; align-items:end; justify-content:space-between}
+.results-head h2{margin:0; font-size:22px; color:var(--brown)}
+.results-head p{margin:4px 0 0; color:var(--muted); font-size:14px; line-height:1.8}
+.count{background:var(--pom); color:#fff; border-radius:999px; padding:5px 13px; font-size:13px; font-weight:700}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:16px}
+.card{
+  background:var(--card); border:1px solid #EBDDBB; border-radius:20px; overflow:hidden;
+  box-shadow:0 6px 18px rgba(58,36,21,.08); display:flex; flex-direction:column;
+}
+.cover-wrap{position:relative; aspect-ratio:1/1; background:linear-gradient(135deg,#E8B25A,#C2571B 55%,#8C2F2F); overflow:hidden}
+.cover-wrap img{width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:2}
+.cover-fallback{position:absolute; inset:0; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; gap:4px}
+.cover-fallback .note{font-size:44px; line-height:1}
+.cover-fallback .init{font-size:20px; font-weight:800}
+.singer-mode .cover-wrap{aspect-ratio:4/3.4; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#F3E2C2,#E8B25A 55%,#C2571B)}
+.singer-mode .avatar{
+  width:128px; height:128px; border-radius:50%; object-fit:cover; border:5px solid #FFFDF6;
+  box-shadow:0 8px 20px rgba(0,0,0,.25); position:relative; z-index:2;
+}
+.singer-mode .cover-fallback{font-size:20px}
+.card-body{padding:14px 14px 16px; display:flex; flex-direction:column; gap:8px; flex:1}
+.song-name{font-weight:800; font-size:16px; line-height:1.6; margin:0}
+.singer-row{display:flex; align-items:center; gap:8px; color:var(--muted); font-size:14px}
+.singer-row img{width:34px; height:34px; border-radius:50%; object-fit:cover; border:2px solid var(--gold); flex:none}
+.singer-row .s-fallback{width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--orange),var(--pom)); color:#fff; display:none; align-items:center; justify-content:center; font-weight:800; flex:none}
+.genre{display:inline-block; align-self:flex-start; background:var(--sand); color:var(--brown2); border-radius:999px; padding:3px 10px; font-size:12px}
+audio{width:100%; height:32px; margin-top:auto}
+.links{display:flex; flex-wrap:wrap; gap:6px; margin-top:2px}
+.links a{
+  text-decoration:none; font-size:12.5px; font-weight:700; border-radius:999px; padding:6px 10px;
+  border:1px solid var(--sand2); background:#fff;
+}
+.links a.spotify{color:#1B7A43; border-color:#BFE3CC}
+.links a.yt{color:#A32323; border-color:#F0C2C2}
+.links a.apple{color:#333}
+.empty{
+  text-align:center; background:var(--card); border:1.5px dashed var(--gold); border-radius:20px;
+  padding:34px 20px; line-height:2; color:var(--muted);
+}
+footer{margin-top:44px; text-align:center; color:var(--muted); font-size:13px; line-height:2}
+footer b{color:var(--brown2)}
+
+@media (max-width:640px){
+  .wrap{padding:12px 12px 44px}
+  .search-card{padding:18px 14px; outline-offset:4px}
+  .input-row{flex-direction:column}
+  button.go{padding:13px}
+  .grid{grid-template-columns:repeat(2,1fr); gap:11px}
+  .card-body{padding:11px}
+  .song-name{font-size:14.5px}
+  .singer-row{font-size:13px}
+  .links a{font-size:11.5px; padding:5px 8px}
+  .singer-mode .avatar{width:104px; height:104px}
+}
+@media (max-width:360px){ .grid{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="orn">✦ ✦ ✦</div>
+    <h1>هم‌نوا <span>🍂</span></h1>
+    <p>نام یک خواننده یا یک آهنگ را بنویسید؛ ده پیشنهاد هم‌سبک، با کاور و لینک گوش دادن، برایتان می‌آورم.</p>
+    <div style="margin-top:12px"><span class="badge">پاییز کلاسیک خاورمیانه‌ای • بدون نیاز به ثبت‌نام</span></div>
+  </header>
+
+  <section class="search-card">
+    <label class="lbl" for="q">چه چیزی در ذهن شماست؟</label>
+    <div class="input-row">
+      <input id="q" type="text" placeholder="مثلاً: شادمهر عقیلی … یا … قلب من" autocomplete="off" enterkeyhint="search">
+      <button class="go" id="goBtn" type="button">پیدا کن 🎵</button>
+    </div>
+
+    <fieldset>
+      <legend>چیزی که تایپ کردید چیست؟</legend>
+      <div class="radios">
+        <label class="radio-pill"><input type="radio" name="mode" value="song" checked><span>🎵 نام آهنگ</span></label>
+        <label class="radio-pill"><input type="radio" name="mode" value="artist"><span>🎤 نام خواننده</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset id="scopeBox">
+      <legend>پیشنهادهای آهنگ از کجا باشند؟</legend>
+      <div class="radios">
+        <label class="radio-pill"><input type="radio" name="scope" value="mix" checked><span>✦ ترکیبی؛ فرقی ندارد</span></label>
+        <label class="radio-pill"><input type="radio" name="scope" value="same"><span>🎤 از همان خواننده</span></label>
+        <label class="radio-pill"><input type="radio" name="scope" value="others"><span>🌍 از خوانندگان دیگر</span></label>
+      </div>
+    </fieldset>
+
+    <p class="hint">نکته: اگر نتیجه کم بود، اسم را به فارسی یا انگلیسی امتحان کنید؛ مثلاً «ابی» یا «Ebi». پیشنهادها بر اساس سبک و خواننده‌های هم‌خانواده انتخاب می‌شوند و لینک‌های اسپاتیفای و یوتیوب موزیک، جستجوی همان آهنگ در آن سرویس‌هاست.</p>
+
+    <div class="chips">
+      <b>امتحان کنید:</b>
+      <button class="chip" type="button" data-q="شادمهر عقیلی" data-mode="artist">شادمهر عقیلی 🎤</button>
+      <button class="chip" type="button" data-q="همایون شجریان" data-mode="artist">همایون شجریان 🎤</button>
+      <button class="chip" type="button" data-q="ابی" data-mode="artist">ابی 🎤</button>
+      <button class="chip" type="button" data-q="گوگوش" data-mode="artist">گوگوش 🎤</button>
+      <button class="chip" type="button" data-q="قلب من" data-mode="song">آهنگ «قلب من» 🎵</button>
+      <button class="chip" type="button" data-q="Adele" data-mode="artist">Adele 🎤</button>
+    </div>
+  </section>
+
+  <div class="status" id="status"></div>
+  <section id="results"></section>
+
+  <footer>
+    <p>🍁 کاورها و پیش‌نمایش‌های ۳۰ ثانیه‌ای از Apple Music / iTunes می‌آیند.<br>
+    لینک «اسپاتیفای» و «یوتیوب موزیک» جستجوی مستقیم همان آهنگ و خواننده در آن سرویس است.<br>
+    <b>هم‌نوا</b> — ساخته‌شده برای کشف موسیقی، با طعم پاییز.</p>
+  </footer>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const qEl = $('#q'), statusEl = $('#status'), resultsEl = $('#results'), goBtn = $('#goBtn');
+
+/* ---------- curated similar-artist families (Persian + international) ----------
+   Keys are matched as substrings against the artist name returned by iTunes,
+   so Persian and Latin spellings both work. Each list is searched live on
+   iTunes, so covers / links / previews are real, not hard-coded. */
+const FAMILIES = [
+  { keys:['شادمهر','shadmehr'], artists:['محسن یگانه','محسن چاوشی','رضا صادقی','بابک جهانبخش','فرزاد فرزین','بهنام بانی','علیرضا طلیسچی','ماکان بند','مهدی یراحی','سیروان خسروی'] },
+  { keys:['ابی','ebi'], artists:['داریوش','گوگوش','معین','هایده','فرهاد مهراد','شهرام شب‌پره','ستار','اندی','کوروش یغمایی','فریدون فروغی'] },
+  { keys:['گوگوش','googoosh'], artists:['ابی','داریوش','هایده','معین','شهرام شب‌پره','لیلا فروهر','ستار','مهستی','حمیرا','اندی'] },
+  { keys:['داریوش','dariush'], artists:['ابی','گوگوش','فرهاد مهراد','فریدون فروغی','هایده','معین','کوروش یغمایی','شهرام شب‌پره','ستار','سیاوش قمیشی'] },
+  { keys:['هایده','hayedeh','مهستی','mahasti'], artists:['گوگوش','ابی','حمیرا','معین','داریوش','لیلا فروهر','ستار','شهرام شب‌پره','دلکش','مرضیه'] },
+  { keys:['معین','moein'], artists:['ابی','گوگوش','هایده','داریوش','شهرام شب‌پره','ستار','اندی','لیلا فروهر','سیاوش قمیشی','فرامرز اصلانی'] },
+  { keys:['محسن یگانه','yeganeh','محسن چاوشی','chavoshi','رضا صادقی','babak','فرزاد فرزین','بهنام بانی','طلیسچی'], artists:['شادمهر عقیلی','محسن یگانه','محسن چاوشی','رضا صادقی','بابک جهانبخش','فرزاد فرزین','بهنام بانی','علیرضا طلیسچی','ماکان بند','سیروان خسروی'] },
+  { keys:['همایون شجریان','شجریان','shajarian','قربانی','ghorbani','سالار عقیلی','ناظری','nazeri'], artists:['همایون شجریان','علیرضا قربانی','سالار عقیلی','شهرام ناظری','محمدرضا شجریان','حسام‌الدین سراج','کیهان کلهر','پرواز همای','علی زند وکیلی','سینا سرلک'] },
+  { keys:['adele'], artists:['Sam Smith','Ed Sheeran','Dua Lipa','Billie Eilish','Taylor Swift','Bruno Mars','Coldplay','Lana Del Rey','Lewis Capaldi','Ariana Grande'] },
+  { keys:['ed sheeran','coldplay','taylor swift','billie eilish','dua lipa'], artists:['Ed Sheeran','Coldplay','Taylor Swift','Billie Eilish','Dua Lipa','Adele','Sam Smith','Bruno Mars','Maroon 5','Imagine Dragons'] },
+  { keys:['یاس','yas','هیچکس','بهرام'], artists:['یاس','هیچکس','بهرام','سروش هیچکس','پیشرو','امیر تتلو','حصین','مهراد هیدن','فدایی','سهراب ام‌جی'] },
+];
+
+function familyFor(artistName){
+  const n = (artistName||'').toLowerCase();
+  for (const f of FAMILIES){
+    if (f.keys.some(k => n.includes(k.toLowerCase()) || k.toLowerCase().includes(n))) return f.artists;
+  }
+  return null;
+}
+function norm(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,' '); }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function bigArt(url){ return url ? url.replace(/\/\d+x\d+bb\.jpg$/, '/600x600bb.jpg') : ''; }
+function spotifyLink(t,a){ return 'https://open.spotify.com/search/' + encodeURIComponent((t||'') + ' ' + (a||'')); }
+function ytLink(t,a){ return 'https://music.youtube.com/search?q=' + encodeURIComponent((t||'') + ' ' + (a||'')); }
+
+async function itunesSearch(term, entity, limit){
+  const url = 'https://itunes.apple.com/search?term=' + encodeURIComponent(term) + '&entity=' + entity + '&limit=' + limit + '&media=music';
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('itunes');
+  return (await r.json()).results || [];
+}
+async function topSongOf(artist){
+  try{
+    const res = await itunesSearch(artist, 'song', 5);
+    const exact = res.find(x => norm(x.artistName) === norm(artist)) || res[0];
+    return exact || null;
+  }catch(e){ return null; }
+}
+function uniqTracks(list, excludeId){
+  const seen = new Set(), out = [];
+  for (const t of list){
+    if (!t || !t.trackName) continue;
+    if (excludeId && t.trackId === excludeId) continue;
+    const key = norm(t.trackName) + '|' + norm(t.artistName);
+    if (seen.has(key)) continue;
+    seen.add(key); out.push(t);
+  }
+  return out;
+}
+function shuffle(a){ const x=[...a]; for(let i=x.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [x[i],x[j]]=[x[j],x[i]]; } return x; }
+
+/* ---------- modes ---------- */
+function setModeUI(){
+  const mode = document.querySelector('input[name=mode]:checked').value;
+  $('#scopeBox').classList.toggle('hidden', mode !== 'song');
+  qEl.placeholder = mode === 'artist' ? 'مثلاً: شادمهر عقیلی، ابی، همایون شجریان' : 'مثلاً: قلب من، مرغ سحر، Hello';
+}
+document.querySelectorAll('input[name=mode]').forEach(r => r.addEventListener('change', setModeUI));
+setModeUI();
+
+async function findSeedSong(term){
+  const res = await itunesSearch(term, 'song', 12);
+  if (!res.length) return null;
+  const exact = res.find(x => norm(x.trackName) === norm(term));
+  return exact || res[0];
+}
+async function findSeedArtist(term){
+  const res = await itunesSearch(term, 'musicArtist', 8);
+  let artist = res[0] || null;
+  if (!artist){
+    const song = await findSeedSong(term);
+    if (song) artist = { artistName: song.artistName, artistId: song.artistId, primaryGenreName: song.primaryGenreName };
+  }
+  return artist;
+}
+
+async function similarArtistsFor(seedArtist){
+  const curated = familyFor(seedArtist.artistName);
+  if (curated){
+    const songs = await Promise.all(curated.map(a => topSongOf(a)));
+    const clean = songs.filter(Boolean).filter(s => norm(s.artistName) !== norm(seedArtist.artistName));
+    if (clean.length >= 6) return uniqTracks(clean).slice(0,10);
+    // if curated gave too few, top it up below with genre results
+    const genre = seedArtist.primaryGenreName || (clean[0] && clean[0].primaryGenreName);
+    if (genre){
+      try{
+        const g = await itunesSearch(genre, 'song', 200);
+        const byArtist = new Map();
+        for (const t of g){ if (norm(t.artistName) !== norm(seedArtist.artistName) && !byArtist.has(norm(t.artistName))) byArtist.set(norm(t.artistName), t); }
+        const extra = [...byArtist.values()].filter(t => !clean.some(c => norm(c.artistName) === norm(t.artistName)));
+        return uniqTracks([...clean, ...extra]).slice(0,10);
+      }catch(e){ return clean.slice(0,10); }
+    }
+    return clean.slice(0,10);
+  }
+  // generic path: same genre, one top song per different artist
+  const genre = seedArtist.primaryGenreName;
+  let pool = [];
+  if (genre){ try{ pool = await itunesSearch(genre, 'song', 200); }catch(e){} }
+  if (!pool.length){ try{ pool = await itunesSearch(seedArtist.artistName, 'song', 50); }catch(e){} }
+  const byArtist = new Map();
+  for (const t of pool){ if (norm(t.artistName) !== norm(seedArtist.artistName) && !byArtist.has(norm(t.artistName))) byArtist.set(norm(t.artistName), t); }
+  return [...byArtist.values()].slice(0,10);
+}
+
+async function similarSongsFor(seed, scope){
+  if (scope === 'same'){
+    const res = await itunesSearch(seed.artistName, 'song', 50);
+    const mine = res.filter(t => norm(t.artistName) === norm(seed.artistName));
+    return uniqTracks(mine, seed.trackId).slice(0,10);
+  }
+  const curated = familyFor(seed.artistName);
+  let others = [];
+  if (curated){
+    const songs = await Promise.all(curated.map(a => topSongOf(a)));
+    others = uniqTracks(songs.filter(Boolean).filter(s => norm(s.artistName) !== norm(seed.artistName)), seed.trackId);
+  }
+  if (others.length < 8 && seed.primaryGenreName){
+    try{
+      const g = await itunesSearch(seed.primaryGenreName, 'song', 200);
+      const extra = uniqTracks(g.filter(t => norm(t.artistName) !== norm(seed.artistName)), seed.trackId)
+        .filter(t => !others.some(o => norm(o.trackName) === norm(t.trackName) && norm(o.artistName) === norm(t.artistName)));
+      others = [...others, ...extra];
+    }catch(e){}
+  }
+  if (scope === 'others') return others.slice(0,10);
+  // mix: interleave same-artist songs with others
+  let mine = [];
+  try{
+    const res = await itunesSearch(seed.artistName, 'song', 50);
+    mine = uniqTracks(res.filter(t => norm(t.artistName) === norm(seed.artistName)), seed.trackId);
+  }catch(e){}
+  const mixed = [];
+  const m = shuffle(mine).slice(0,4), o = shuffle(others).slice(0,8);
+  for (let i=0; i<Math.max(m.length, o.length); i++){ if (o[i]) mixed.push(o[i]); if (m[i]) mixed.push(m[i]); }
+  const rest = [...mine, ...others].filter(t => !mixed.some(x => x.trackId === t.trackId));
+  return uniqTracks([...mixed, ...rest]).slice(0,10);
+}
+
+/* ---------- render ---------- */
+function cardHTML(t, singerMode){
+  const art = bigArt(t.artworkUrl100);
+  const init = esc((t.artistName||'?').trim().charAt(0));
+  const singerImg = art
+    ? '<img src="' + esc(art) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
+    : '';
+  const singerFallback = '<span class="s-fallback" style="display:inline-flex">' + init + '</span>';
+  const audio = t.previewUrl ? '<audio controls preload="none" src="' + esc(t.previewUrl) + '"></audio>' : '';
+  const apple = t.trackViewUrl ? '<a class="apple" href="' + esc(t.trackViewUrl) + '" target="_blank" rel="noopener"> اپل موزیک</a>' : '';
+  if (singerMode){
+    return '<article class="card singer-mode">'
+      + '<div class="cover-wrap"><div class="cover-fallback"><span class="note">🎤</span><span class="init">' + init + '</span></div>'
+      + (art ? '<img class="avatar" src="' + esc(art) + '" alt="عکس ' + esc(t.artistName) + '" loading="lazy" onerror="this.style.opacity=0">' : '')
+      + '</div>'
+      + '<div class="card-body"><h3 class="song-name">' + esc(t.artistName) + '</h3>'
+      + '<p style="margin:0;color:var(--muted);font-size:14px;line-height:1.7">بهترین آهنگ: <b style="color:var(--brown2)">' + esc(t.trackName) + '</b></p>'
+      + (t.primaryGenreName ? '<span class="genre">' + esc(t.primaryGenreName) + '</span>' : '')
+      + audio
+      + '<div class="links"><a class="spotify" href="' + spotifyLink(t.trackName, t.artistName) + '" target="_blank" rel="noopener">▶ اسپاتیفای</a>'
+      + '<a class="yt" href="' + ytLink(t.trackName, t.artistName) + '" target="_blank" rel="noopener">▶ یوتیوب موزیک</a>' + apple + '</div></div></article>';
+  }
+  return '<article class="card">'
+    + '<div class="cover-wrap"><div class="cover-fallback"><span class="note">🎵</span><span class="init">' + init + '</span></div>'
+    + (art ? '<img src="' + esc(art) + '" alt="کاور ' + esc(t.trackName) + '" loading="lazy" onerror="this.style.opacity=0">' : '')
+    + '</div>'
+    + '<div class="card-body"><h3 class="song-name">' + esc(t.trackName) + '</h3>'
+    + '<div class="singer-row">' + (art ? '<img src="' + esc(art) + '" alt="" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'inline-flex\'">' + singerFallback : singerFallback)
+    + '<span>' + esc(t.artistName) + '</span></div>'
+    + (t.primaryGenreName ? '<span class="genre">' + esc(t.primaryGenreName) + '</span>' : '')
+    + audio
+    + '<div class="links"><a class="spotify" href="' + spotifyLink(t.trackName, t.artistName) + '" target="_blank" rel="noopener">▶ اسپاتیفای</a>'
+    + '<a class="yt" href="' + ytLink(t.trackName, t.artistName) + '" target="_blank" rel="noopener">▶ یوتیوب موزیک</a>' + apple + '</div></div></article>';
+}
+
+async function runSearch(){
+  const term = qEl.value.trim();
+  if (!term){ qEl.focus(); return; }
+  const mode = document.querySelector('input[name=mode]:checked').value;
+  const scope = document.querySelector('input[name=scope]:checked').value;
+  goBtn.disabled = true;
+  resultsEl.innerHTML = '';
+  statusEl.innerHTML = '<div class="spinner"></div><div>در حال گشتن میان آهنگ‌های هم‌سبک… 🍂</div>';
+  try{
+    let items = [], head = '', sub = '';
+    if (mode === 'artist'){
+      const seed = await findSeedArtist(term);
+      if (!seed) throw new Error('notfound');
+      // top song of the seed artist, for its genre
+      const top = await topSongOf(seed.artistName);
+      if (top) seed.primaryGenreName = seed.primaryGenreName || top.primaryGenreName;
+      items = await similarArtistsFor(seed);
+      head = 'خواننده‌های مشابه «' + esc(seed.artistName) + '»';
+      sub = 'از هر خواننده، یک آهنگ برتر او را هم آورده‌ام تا همان‌جا گوش بدهید.';
+    } else {
+      const seed = await findSeedSong(term);
+      if (!seed) throw new Error('notfound');
+      items = await similarSongsFor(seed, scope);
+      const scopeFa = scope === 'same' ? 'از همان خواننده' : scope === 'others' ? 'از خوانندگان دیگر' : 'ترکیبی';
+      head = 'آهنگ‌های مشابه «' + esc(seed.trackName) + '» از ' + esc(seed.artistName);
+      sub = 'محدوده: ' + scopeFa + ' • آهنگ اصلی از فهرست حذف شده است.';
+    }
+    if (!items.length) throw new Error('notfound');
+    statusEl.innerHTML = '';
+    resultsEl.innerHTML = '<div class="results-head"><div><h2>' + head + '</h2><p>' + sub + '</p></div><span class="count">' + items.length + ' پیشنهاد</span></div>'
+      + '<div class="grid">' + items.map(t => cardHTML(t, mode === 'artist')).join('') + '</div>';
+    resultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+  }catch(e){
+    statusEl.innerHTML = '';
+    resultsEl.innerHTML = '<div class="error">چیزی پیدا نشد 😔<br>اسم را کوتاه‌تر بنویسید، یا به فارسی/انگلیسی دیگر امتحان کنید؛ مثلاً «شادمهر»، «ابی» یا «Adele».<br>اگر اینترنت شما به iTunes دسترسی ندارد، نتیجه خالی می‌ماند.</div>';
+  }finally{
+    goBtn.disabled = false;
+  }
+}
+
+goBtn.addEventListener('click', runSearch);
+qEl.addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+  qEl.value = c.dataset.q;
+  document.querySelector('input[name=mode][value="' + c.dataset.mode + '"]').checked = true;
+  setModeUI();
+  runSearch();
+}));
+</script>
+</body>
+</html>
